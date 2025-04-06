@@ -1,0 +1,581 @@
+{% extends "base.html" %} {% block title %}Resume Builder - Home{% endblock %}
+{% block content %}
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/style.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/resume.css') }}"
+/>
+
+<style>
+  /* Root Variables for Light Mode */
+  :root {
+    --primary-color: #2563eb;
+    --secondary-color: #0f172a;
+    --accent-color: #38bdf8;
+    --light-bg: #ffffff;
+    --dark-bg: #1e293b;
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --btn-text: #ffffff;
+    --border-color: #dee2e6;
+    --input-bg: #ffffff;
+    --muted-text: #6c757d;
+    --success-color: #198754;
+    --hover-red: #ff0000;
+    --transition-speed: 0.3s;
+    --font-family: Inter, "-apple-system", BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+  }
+
+  /* Dark Mode Variables */
+  [data-theme="dark"] {
+    --primary-color: #60a5fa;
+    --secondary-color: #1e40af;
+    --accent-color: #38bdf8;
+    --light-bg: #1e293b;
+    --dark-bg: #0f172a;
+    --text-color: #e0e0e0;
+    --card-bg: #252f3f;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --btn-text: #ffffff;
+    --border-color: #4b5563;
+    --input-bg: #374151;
+    --muted-text: #9ca3af;
+    --success-color: #34d399;
+    --hover-red: #ff5555;
+  }
+
+  /* General Body Styling */
+  body {
+    font-family: var(--font-family);
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-speed),
+      color var(--transition-speed);
+  }
+
+  /* Container Styling */
+  .container {
+    padding-top: 1px;
+    max-width: 850px; /* Standard resume width */
+    margin: 0 auto;
+  }
+
+  /* Row and Column Adjustments */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .col,
+  .col-auto {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Card Styling */
+  .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: background-color var(--transition-speed),
+      border-color var(--transition-speed);
+  }
+
+  .card-body {
+    padding: 2rem;
+  }
+
+  /* Top-Level Header (Preview Your Resume) */
+  .h3 {
+    font-size: 1.25rem; /* Smaller than default h3 (1.75rem) */
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .text-muted {
+    font-size: 0.9rem;
+    color: var(--muted-text);
+  }
+
+  /* Buttons */
+  .btn {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color var(--transition-speed),
+      border-color var(--transition-speed), transform var(--transition-speed);
+  }
+
+  .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: transparent;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--btn-text);
+    transform: translateY(-2px);
+  }
+
+  .btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    color: var(--btn-text);
+  }
+
+  .btn-success:hover {
+    background-color: #166d48;
+    border-color: #166d48;
+    transform: translateY(-2px);
+  }
+
+  [data-theme="dark"] .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  [data-theme="dark"] .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+  }
+
+  .d-flex.gap-2 {
+    gap: 0.5rem;
+  }
+
+  /* Resume Container */
+  .resume-container {
+    font-size: 11pt; /* Standard resume font size */
+    color: var(--text-color);
+  }
+
+  /* Resume Header */
+  .resume-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .name {
+    font-size: 1.5rem; /* Smaller than typical h1 (was ~2rem), still prominent */
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contact-info {
+    font-size: 10pt;
+    color: var(--text-color);
+    margin: 0;
+  }
+
+  /* Resume Sections */
+  .resume-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-heading {
+    font-size: 1rem; /* Smaller than default h2 (1.5rem) */
+    font-weight: 700;
+    color: var(--text-color);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.5px;
+  }
+
+  .section-divider {
+    border: 0;
+    border-top: 1px solid var(--text-color);
+    margin: 0.25rem 0 1rem 0;
+  }
+
+  /* Resume Items */
+  .resume-item {
+    margin-bottom: 1rem;
+  }
+
+  .institution,
+  .company,
+  .project-title,
+  .organization {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.1rem;
+  }
+
+  .degree,
+  .title,
+  .role {
+    font-size: 11pt;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 0.1rem;
+  }
+
+  .gpa,
+  .coursework,
+  .location,
+  .date {
+    font-size: 10pt;
+    color: var(--text-color);
+    margin-bottom: 0.1rem;
+  }
+
+  .achievements {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-top: 0.25rem;
+    padding-left: 0;
+  }
+
+  .achievements li {
+    font-size: 10pt;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+  }
+
+  /* Additional Section */
+  .resume-section p {
+    font-size: 10pt;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+  }
+
+  .resume-section strong {
+    font-weight: 700;
+    color: var(--text-color);
+  }
+
+  /* Mobile Optimizations */
+  @media (max-width: 768px) {
+    .container {
+      padding-top: 5px;
+      margin: 0.5rem;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .h3 {
+      font-size: 1.1rem; /* Smaller for mobile */
+    }
+
+    .text-muted {
+      font-size: 0.85rem;
+    }
+
+    .btn {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      width: 100%;
+      margin: 0.25rem 0;
+    }
+
+    .d-flex.gap-2 {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .name {
+      font-size: 1.25rem; /* Adjusted for mobile */
+    }
+
+    .contact-info {
+      font-size: 9pt;
+    }
+
+    .section-heading {
+      font-size: 0.9rem; /* Adjusted for mobile */
+    }
+
+    .resume-container {
+      font-size: 10pt;
+    }
+
+    .institution,
+    .company,
+    .project-title,
+    .organization {
+      font-size: 10pt;
+    }
+
+    .degree,
+    .title,
+    .role {
+      font-size: 10pt;
+    }
+
+    .gpa,
+    .coursework,
+    .location,
+    .date {
+      font-size: 9pt;
+    }
+
+    .achievements li {
+      font-size: 9pt;
+    }
+
+    .resume-section p {
+      font-size: 9pt;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .h3 {
+      font-size: 1rem; /* Even smaller for very small screens */
+    }
+
+    .name {
+      font-size: 1.1rem;
+    }
+
+    .section-heading {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Additional Styling for Consistency */
+  .resume-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .resume-item .d-flex {
+    gap: 1rem;
+  }
+
+  .text-end {
+    text-align: right;
+  }
+
+  .btn:hover {
+    box-shadow: 0 4px 8px var(--shadow-color);
+  }
+
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+  }
+
+  /* Utility Classes */
+  .mb-4 {
+    margin-bottom: 1.5rem;
+  }
+
+  .p-4 {
+    padding: 1.5rem;
+  }
+
+  .shadow-sm {
+    box-shadow: 0 2px 4px var(--shadow-color);
+  }
+</style>
+
+<div class="container my-5">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="h3">Preview Your Resume</h1>
+      <p class="text-muted">
+        Here's how your ATC-approved resume will look. You can download it or go
+        back to make changes.
+      </p>
+    </div>
+    <div class="col-auto">
+      <form action="/download" method="post" id="download-form">
+        <!-- Hidden fields to pass all the data -->
+        {% for key, value in request.form.items() %} {% if key.endswith('[]') %}
+        {% for item in request.form.getlist(key) %}
+        <input type="hidden" name="{{ key }}" value="{{ item }}" />
+        {% endfor %} {% else %}
+        <input type="hidden" name="{{ key }}" value="{{ value }}" />
+        {% endif %} {% endfor %}
+        <div class="d-flex gap-2">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="window.history.back();"
+          >
+            <i class="fas fa-edit me-2"></i>Edit Resume
+          </button>
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-download me-2"></i>Download PDF
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Resume Preview -->
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <div class="resume-container">
+        <!-- Header -->
+        <div class="resume-header text-center mb-4">
+          <h1 class="name">{{ resume.first_name }} {{ resume.last_name }}</h1>
+          <p class="contact-info">
+            {{ resume.location }} | {{ resume.phone }} | {{ resume.email }}
+          </p>
+        </div>
+
+        <!-- Education Section -->
+        {% if resume.education %}
+        <div class="resume-section mb-4">
+          <h2 class="section-heading">EDUCATION</h2>
+          <hr class="section-divider" />
+          {% for edu in resume.education %} {% if edu.institution %}
+          <div class="resume-item mb-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h3 class="institution">{{ edu.institution }}</h3>
+                <p class="degree">
+                  {{ edu.degree }}{% if edu.major %}, {{ edu.major }}{% endif %}
+                </p>
+                {% if edu.gpa %}
+                <p class="gpa">Cumulative GPA: {{ edu.gpa }}</p>
+                {% endif %} {% if edu.coursework %}
+                <p class="coursework">
+                  Relevant Coursework: {{ edu.coursework }}
+                </p>
+                {% endif %}
+              </div>
+              <div class="text-end">
+                <p class="location">{{ edu.location }}</p>
+                <p class="date">{{ edu.start_date }} - {{ edu.end_date }}</p>
+              </div>
+            </div>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Work Experience Section -->
+        {% if resume.experience %}
+        <div class="resume-section mb-4">
+          <h2 class="section-heading">WORK EXPERIENCE</h2>
+          <hr class="section-divider" />
+          {% for exp in resume.experience %} {% if exp.company %}
+          <div class="resume-item mb-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h3 class="company">{{ exp.company }}</h3>
+                <p class="title">{{ exp.title }}</p>
+              </div>
+              <div class="text-end">
+                <p class="location">{{ exp.location }}</p>
+                <p class="date">{{ exp.start_date }} - {{ exp.end_date }}</p>
+              </div>
+            </div>
+            <ul class="achievements">
+              {% for bullet in exp.bullets %}
+              <li>{{ bullet }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Projects Section -->
+        {% if resume.projects %}
+        <div class="resume-section mb-4">
+          <h2 class="section-heading">UNIVERSITY PROJECTS</h2>
+          <hr class="section-divider" />
+          {% for project in resume.projects %} {% if project.title %}
+          <div class="resume-item mb-3">
+            <div class="d-flex justify-content-between">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="date">{{ project.date }}</p>
+            </div>
+            <ul class="achievements">
+              {% for bullet in project.bullets %}
+              <li>{{ bullet }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Activities Section -->
+        {% if resume.activities %}
+        <div class="resume-section mb-4">
+          <h2 class="section-heading">ACTIVITIES</h2>
+          <hr class="section-divider" />
+          {% for activity in resume.activities %} {% if activity.organization %}
+          <div class="resume-item mb-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h3 class="organization">{{ activity.organization }}</h3>
+                <p class="role">{{ activity.role }}</p>
+              </div>
+              <div class="text-end">
+                <p class="location">{{ activity.location }}</p>
+                <p class="date">
+                  {{ activity.start_date }} - {{ activity.end_date }}
+                </p>
+              </div>
+            </div>
+            <ul class="achievements">
+              {% for bullet in activity.bullets %}
+              <li>{{ bullet }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Additional Section -->
+        <div class="resume-section">
+          <h2 class="section-heading">ADDITIONAL</h2>
+          <hr class="section-divider" />
+          {% if resume.technical_skills %}
+          <p>
+            <strong>Technical Skills:</strong> {{ resume.technical_skills }}
+          </p>
+          {% endif %} {% if resume.languages %}
+          <p><strong>Languages:</strong> {{ resume.languages }}</p>
+          {% endif %} {% if resume.certifications %}
+          <p>
+            <strong>Certifications & Training:</strong> {{ resume.certifications
+            }}
+          </p>
+          {% endif %} {% if resume.awards %}
+          <p><strong>Awards:</strong> {{ resume.awards }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

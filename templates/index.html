@@ -1,0 +1,321 @@
+{% extends "base.html" %} {% block title %}Resume Builder - Home{% endblock %}
+{% block content %}
+<style>
+  /* Variables for Light and Dark Modes */
+  :root {
+    --primary-color: #2563eb;
+    --secondary-color: #0f172a;
+    --accent-color: #38bdf8;
+    --light-bg: #ffffff;
+    --dark-bg: #1e293b;
+    --text-color: #333;
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --btn-text: #ffffff;
+    --light-grey: #f8f9fa;
+    --gradient-start: #f0f7ff; /* Subtle light blue for gradient */
+    --gradient-end: #ffffff; /* White for gradient */
+  }
+
+  /* Dark Mode Variables */
+  [data-theme="dark"] {
+    --primary-color: #60a5fa;
+    --secondary-color: #1e40af;
+    --accent-color: #38bdf8;
+    --light-bg: #1e293b;
+    --dark-bg: #0f172a;
+    --text-color: #e0e0e0;
+    --card-bg: #252f3f;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --btn-text: #ffffff;
+    --light-grey: #2d3748;
+    --gradient-start: #2d3748; /* Darker grey for gradient */
+    --gradient-end: #1e293b; /* Dark base for gradient */
+  }
+
+  body {
+    font-family: Inter, "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background-color: var(--primary-color);
+    background-image: linear-gradient(
+      135deg,
+      var(--primary-color) 0%,
+      var(--secondary-color) 100%
+    );
+    padding: 100px 0;
+    margin-bottom: 40px;
+    color: #ffffff;
+  }
+
+  .hero-section h1,
+  .hero-section p {
+    color: #ffffff;
+  }
+
+  .hero-section .btn-light {
+    background-color: var(--light-bg);
+    color: var(--primary-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .hero-section .btn-light:hover {
+    background-color: #e5e7eb;
+    color: var(--secondary-color);
+  }
+
+  [data-theme="dark"] .hero-section .btn-light {
+    background-color: var(--dark-bg);
+    color: var(--accent-color);
+  }
+
+  [data-theme="dark"] .hero-section .btn-light:hover {
+    background-color: #374151;
+  }
+
+  /* Features Section */
+  .features {
+    padding: 60px 0;
+    background-color: var(--light-bg);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    transition: color 0.3s;
+  }
+
+  .card {
+    background-color: var(--card-bg);
+    border: none;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: background-color 0.3s;
+  }
+
+  .card-title {
+    color: var(--text-color);
+  }
+
+  .card-text {
+    color: var(--text-color);
+  }
+
+  /* How It Works Section - Aesthetic Design */
+  .how-it-works {
+    padding: 60px 0;
+    background: linear-gradient(
+      180deg,
+      var(--gradient-start) 0%,
+      var(--gradient-end) 100%
+    ); /* Subtle gradient */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .how-it-works h2 {
+    color: var(--text-color);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    transition: transform 0.3s ease, background-color 0.3s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step:hover {
+    transform: translateY(-5px); /* Subtle lift on hover */
+  }
+
+  .step-number {
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: var(--btn-text);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 15px;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .step h3 {
+    color: var(--text-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .step p {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--btn-text);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 60px 0;
+    }
+
+    .features,
+    .how-it-works {
+      padding: 40px 0;
+    }
+
+    .step {
+      margin-bottom: 20px; /* Space between steps when stacked */
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+
+    .step h3 {
+      font-size: 1.1rem;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<header class="hero-section text-center text-white py-5">
+  <div class="container">
+    <h1 class="display-4 fw-bold mb-4">
+      Create Your ATC(Aim To Career) Resume
+    </h1>
+    <p class="lead mb-4">
+      Build a professional resume that stands out and gets you noticed
+    </p>
+    <a href="/build-resume" class="btn btn-light btn-lg px-4 me-sm-3"
+      >Start Building Now</a
+    >
+  </div>
+</header>
+
+<section class="features py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">Why Choose Our Resume Builder?</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-check-circle feature-icon mb-3"></i>
+            <h3 class="card-title h5">ATC-Approved Format</h3>
+            <p class="card-text">
+              Our templates follow the exact format approved by recruiters and
+              ATS systems.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-bolt feature-icon mb-3"></i>
+            <h3 class="card-title h5">Easy and Fast</h3>
+            <p class="card-text">
+              Build your professional resume in minutes with our intuitive form
+              builder.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-download feature-icon mb-3"></i>
+            <h3 class="card-title h5">Instant Download</h3>
+            <p class="card-text">
+              Preview your resume and download it instantly as a professionally
+              formatted PDF.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-it-works py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">How It Works</h2>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="step text-center">
+          <div class="step-number">1</div>
+          <h3 class="h5">Fill Your Details</h3>
+          <p>
+            Enter your personal information, education, work experience, and
+            skills
+          </p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="step text-center">
+          <div class="step-number">2</div>
+          <h3 class="h5">Review Format</h3>
+          <p>Preview how your resume will look with our ATC-approved format</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="step text-center">
+          <div class="step-number">3</div>
+          <h3 class="h5">Make Adjustments</h3>
+          <p>Edit and fine-tune your content until it's perfect</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="step text-center">
+          <div class="step-number">4</div>
+          <h3 class="h5">Download PDF</h3>
+          <p>Get your polished, professional resume ready to use</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="/build-resume" class="btn btn-primary btn-lg"
+        >Create Your Resume Now</a
+      >
+    </div>
+  </div>
+</section>
+{% endblock %}

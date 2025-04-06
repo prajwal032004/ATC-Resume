@@ -1,0 +1,62 @@
+<header>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-file-alt me-2"></i>ATC Resume Builder
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('build_resume') }}"
+              >Build Resume</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('blog') }}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+          <div class="theme-toggle-wrapper d-none d-lg-block me-3">
+            <div class="theme-toggle">
+              <input
+                type="checkbox"
+                id="theme-toggle-checkbox"
+                class="theme-toggle-checkbox"
+              />
+            </div>
+          </div>
+          <div class="auth-buttons">
+            {% if 'user_id' in session %}
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-primary"
+              >Logout</a
+            >
+            {% else %}
+            <a
+              href="{{ url_for('login') }}"
+              class="btn btn-outline-primary me-2"
+              >Login</a
+            >
+            <a href="{{ url_for('register') }}" class="btn btn-primary"
+              >Register</a
+            >
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

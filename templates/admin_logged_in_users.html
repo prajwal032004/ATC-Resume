@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Logged-In Users - Resume Builder</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f7fa;
+        color: #333;
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-link:hover {
+        background-color: #2980b9;
+      }
+
+      .users-table {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      th {
+        background-color: #2c3e50;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        font-size: 0.95rem;
+        color: #555;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9fafb;
+      }
+
+      tr:hover {
+        background-color: #eef2f7;
+        transition: background-color 0.2s ease;
+      }
+
+      .no-users {
+        text-align: center;
+        padding: 20px;
+        font-size: 1.1rem;
+        color: #777;
+      }
+
+      .flash-messages {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .error {
+        color: #e74c3c;
+        background-color: #fceae9;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .success {
+        color: #27ae60;
+        background-color: #e9f7ef;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        th,
+        td {
+          padding: 10px;
+          font-size: 0.85rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Logged-In Users</h1>
+      <a href="{{ url_for('admin_dashboard') }}" class="back-link"
+        >Back to Dashboard</a
+      >
+
+      {% if logged_in_users %}
+      <div class="users-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user_id, user in logged_in_users.items() %}
+            <tr>
+              <td>{{ user['name'] }}</td>
+              <td>{{ user['email'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="no-users">No users are currently logged in.</p>
+      {% endif %}
+
+      <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+        {% endfor %} {% endif %} {% endwith %}
+      </div>
+    </div>
+  </body>
+</html>

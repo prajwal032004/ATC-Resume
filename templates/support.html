@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support - ATC Resume</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-blue: #1e40af;
+        --secondary-blue: #2563eb;
+        --light-blue: #dbeafe;
+        --white: #ffffff;
+        --text-dark: #1f2937;
+        --gray: #6b7280;
+        --transition: 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background: var(--white);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: var(--primary-blue);
+        color: var(--white);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1rem 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: var(--white);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color var(--transition);
+      }
+
+      .nav-links a:hover {
+        color: var(--light-blue);
+      }
+
+      .nav-toggle {
+        display: none;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: var(--white);
+        cursor: pointer;
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(
+          to right,
+          var(--primary-blue),
+          var(--secondary-blue)
+        );
+        color: var(--white);
+        padding: 6rem 0 2rem;
+        text-align: center;
+        margin-top: 60px;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Support Sections */
+      .support-section {
+        padding: 4rem 0;
+      }
+
+      .support-section h2 {
+        font-size: 2rem;
+        color: var(--primary-blue);
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .guide-list,
+      .troubleshooting {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .guide-item,
+      .trouble-item {
+        background: var(--light-blue);
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform var(--transition);
+      }
+
+      .guide-item:hover,
+      .trouble-item:hover {
+        transform: translateY(-4px);
+      }
+
+      .guide-item h3,
+      .trouble-item h3 {
+        font-size: 1.25rem;
+        color: var(--secondary-blue);
+        margin-bottom: 0.75rem;
+      }
+
+      .guide-item p,
+      .trouble-item p {
+        color: var(--gray);
+      }
+
+      .guide-item ol {
+        padding-left: 1.5rem;
+        color: var(--gray);
+      }
+
+      .guide-item ol li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--primary-blue);
+        color: var(--white);
+        padding: 4rem 0 2rem;
+      }
+
+      .footer-headings {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .footer-section h5 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .footer-section p,
+      .footer-section ul li {
+        font-size: 0.875rem;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.75rem;
+      }
+
+      .footer-section a {
+        color: var(--light-blue);
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+
+      .footer-section a:hover {
+        color: var(--white);
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-icons a {
+        color: var(--light-blue);
+        font-size: 1.25rem;
+        transition: color var(--transition);
+      }
+
+      .social-icons a:hover {
+        color: var(--white);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.875rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navbar .container {
+          position: relative;
+        }
+
+        .nav-toggle {
+          display: block;
+        }
+
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--primary-blue);
+          padding: 1rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .header {
+          padding: 5rem 0 2rem;
+        }
+
+        .header h1 {
+          font-size: 1.5rem;
+        }
+
+        .support-section h2 {
+          font-size: 1.75rem;
+        }
+
+        .guide-item,
+        .trouble-item {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="{{ url_for('index') }}" class="logo">ATC Resume Builder</a>
+        <button class="nav-toggle"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/support">Support</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <h1>Support Center</h1>
+      </div>
+    </header>
+
+    <!-- Support Content -->
+    <section class="support-section">
+      <div class="container">
+        <h2>How to Use ATC Resume</h2>
+        <div class="guide-list">
+          <div class="guide-item">
+            <h3>Step 1: Register and Log In</h3>
+            <p>To start building your resume, you need an account:</p>
+            <ol>
+              <li>
+                Go to the homepage and click "Register" in the navbar (or visit
+                <a href="/register">/register</a>).
+              </li>
+              <li>Enter your email, password, and full name, then submit.</li>
+              <li>
+                After registering, go to <a href="/login">/login</a>, enter your
+                credentials, and click "Log In."
+              </li>
+            </ol>
+          </div>
+          <div class="guide-item">
+            <h3>Step 2: Build Your Resume</h3>
+            <p>Create your resume with our easy-to-use tool:</p>
+            <ol>
+              <li>
+                Once logged in, navigate to
+                <a href="/build-resume">/build-resume</a> from the homepage or
+                navbar.
+              </li>
+              <li>
+                Fill out the form with your personal info (name, email, phone,
+                location).
+              </li>
+              <li>
+                Add sections like Education, Work Experience, Projects, and
+                Skills. Use the "Add More" buttons to include multiple entries.
+              </li>
+              <li>
+                For each section, provide details like dates, descriptions, and
+                bullet points for achievements.
+              </li>
+              <li>Click "Preview" to see your resume.</li>
+            </ol>
+          </div>
+          <div class="guide-item">
+            <h3>Step 3: Preview and Edit</h3>
+            <p>Review and refine your resume:</p>
+            <ol>
+              <li>
+                After submitting the form, you’ll see a preview of your resume.
+              </li>
+              <li>
+                Check for accuracy and formatting. If needed, go back to edit
+                any section.
+              </li>
+              <li>
+                Ensure your content is ATS-friendly by using job-specific
+                keywords and avoiding complex layouts.
+              </li>
+            </ol>
+          </div>
+          <div class="guide-item">
+            <h3>Step 4: Download Your Resume</h3>
+            <p>Get your resume as a PDF:</p>
+            <ol>
+              <li>From the preview page, click "Download."</li>
+              <li>
+                The system will generate a PDF file named with your name (e.g.,
+                "John_Doe_Resume.pdf").
+              </li>
+              <li>
+                Save the file to your device and use it for job applications.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <h2>Troubleshooting Tips</h2>
+        <div class="troubleshooting">
+          <div class="trouble-item">
+            <h3>Can’t Log In</h3>
+            <p>
+              Double-check your email and password. If you’ve forgotten your
+              password, this feature is coming soon—meanwhile, create a new
+              account with a different email.
+            </p>
+          </div>
+          <div class="trouble-item">
+            <h3>PDF Download Fails</h3>
+            <p>
+              Ensure all required fields (e.g., name, education) are filled. Try
+              refreshing the page or using a different browser (Chrome or
+              Firefox recommended).
+            </p>
+          </div>
+          <div class="trouble-item">
+            <h3>Form Data Not Saving</h3>
+            <p>
+              You must be logged in to save data. If logged in and still facing
+              issues, clear your browser cache or log out and back in.
+            </p>
+          </div>
+          <div class="trouble-item">
+            <h3>Preview Looks Wrong</h3>
+            <p>
+              Check for typos or incomplete fields. Avoid special characters or
+              excessive text in descriptions, as they may disrupt formatting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-headings">
+          <div class="footer-section">
+            <h5>ATC Resume</h5>
+            <p>Your go-to tool for creating ATS-friendly resumes.</p>
+          </div>
+          <div class="footer-section">
+            <h5>Quick Links</h5>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/support">Support</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h5>Resources</h5>
+            <ul>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/support">Support</a></li>
+              <li><a href="{{ url_for('admin_login') }}">Admin Login</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h5>Contact Us</h5>
+            <ul>
+              <li>
+                <a href="mailto:dropafile07@gmail.com">dropafile07@gmail.com</a>
+              </li>
+              <li>Bengaluru,Karnataka</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© {{year}} ATC Resume. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelector(".nav-toggle").addEventListener("click", () => {
+        document.querySelector(".nav-links").classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>
