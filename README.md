@@ -82,7 +82,7 @@ pip install -r requirements.txt
 Create a `.env` file in the root directory:
 ```env
 FLASK_SECRET_KEY=your-secret-key-here
-ANTHROPIC_API_KEY=your-anthropic-api-key
+GEMINI_API_KEY=your-gemini-api-key
 # Add other API keys as needed
 ```
 
