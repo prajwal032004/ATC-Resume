@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %}AI Job Matcher - ATC{% endblock %} {%
+block content %}
+<div class="container page-container">
+  <div class="text-center">
+    <h1 class="section-title">AI Job Matcher</h1>
+    <p class="subtitle">
+      Let our AI analyze your resume's skills and experience to suggest suitable
+      job roles and titles.
+    </p>
+  </div>
+
+  <!-- The form ID and results ID are critical for the JavaScript to work -->
+  <form id="job-matcher-form" class="ai-tool-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <label for="resume-upload-jm" class="sr-only">Upload Resume</label>
+    <input
+      id="resume-upload-jm"
+      type="file"
+      name="resume"
+      accept=".pdf"
+      required
+    />
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      style="margin-top: 20px"
+    >
+      <i class="fas fa-briefcase"></i> Find Matching Jobs
+    </button>
+  </form>
+
+  <div id="job-matcher-results" class="ai-tool-results">
+    <p>Suggested job roles based on your resume will appear here...</p>
+  </div>
+</div>
+{% endblock %}

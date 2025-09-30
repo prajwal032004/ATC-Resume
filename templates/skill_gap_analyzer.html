@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %}AI Skill Gap Analyzer - ATC{%
+endblock %} {% block content %}
+<div class="container page-container">
+  <div class="text-center">
+    <h1 class="section-title">AI Skill Gap Analyzer</h1>
+    <p class="subtitle">
+      Compare the skills on your resume with the most in-demand technologies in
+      the current job market.
+    </p>
+  </div>
+
+  <!-- The form ID and results ID are critical for the JavaScript to work -->
+  <form id="skill-gap-form" class="ai-tool-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <label for="resume-upload-sg" class="sr-only">Upload Resume</label>
+    <input
+      id="resume-upload-sg"
+      type="file"
+      name="resume"
+      accept=".pdf"
+      required
+    />
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      style="margin-top: 20px"
+    >
+      <i class="fas fa-chart-line"></i> Analyze My Skills
+    </button>
+  </form>
+
+  <div id="skill-gap-results" class="ai-tool-results">
+    <p>Your skill gap analysis will appear here...</p>
+  </div>
+</div>
+{% endblock %}

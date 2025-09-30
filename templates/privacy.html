@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block title %}Privacy Policy - ATC Resume Builder{%
+endblock %} {% block content %}
+<div class="container page-container">
+  <h1 class="section-title">Privacy Policy</h1>
+  <div class="page-content">
+    <p><strong>Last Updated: 03-07-2025</strong></p>
+
+    <p>
+      ATC Resume Builder ("we," "us," or "our") is committed to protecting your
+      privacy. This Privacy Policy explains how we collect, use, disclose, and
+      safeguard your information when you visit our website.
+    </p>
+
+    <h3>1. DATA COLLECTION & USAGE</h3>
+    <p>
+      <strong
+        >We are designed to be privacy-first. We do NOT store your personal
+        resume data on our servers.</strong
+      >
+    </p>
+    <ul>
+      <li>
+        <strong>Session Data:</strong> When you use the Resume Builder, the
+        information you enter (name, email, skills, etc.) is stored temporarily
+        in your browser's session. This data is required to generate your resume
+        preview and PDF. This session is automatically deleted when you close
+        your browser.
+      </li>
+      <li>
+        <strong>Uploaded Resumes:</strong> When you use the Resume Analyzer or
+        other AI tools, your uploaded PDF is processed on our server to extract
+        the text. This text is sent to the Google Gemini API for analysis and
+        then immediately discarded from our system. The file itself is not
+        stored after processing.
+      </li>
+      <li>
+        <strong>Newsletter:</strong> If you choose to subscribe to our
+        newsletter, we collect your email address. This is strictly optional and
+        requires your explicit consent.
+      </li>
+    </ul>
+
+    <h3>2. THIRD-PARTY SERVICES (GOOGLE GEMINI API)</h3>
+    <p>
+      To provide our AI features, we send the text content from your resume (or
+      summary prompts) to the Google Gemini API. We do not send any personally
+      identifiable file names. Google's use of this data is governed by their
+      own
+      <a href="https://policies.google.com/privacy" target="_blank"
+        >Privacy Policy</a
+      >.
+    </p>
+
+    <h3>3. COOKIES</h3>
+    <p>
+      We use a necessary cookie for security purposes (CSRF token) to protect
+      our forms. We do not use tracking or advertising cookies.
+    </p>
+
+    <h3>4. YOUR RIGHTS (GDPR)</h3>
+    <p>
+      As we do not store your personal data, the rights of access,
+      rectification, and erasure are fulfilled by our system's design. You have
+      full control over the data you input, and it is removed when your session
+      ends.
+    </p>
+
+    <h3>5. SECURITY</h3>
+    <p>
+      We implement security measures like CSRF protection and best practices to
+      protect the data during its brief processing period. All communication
+      with our server is encrypted via HTTPS.
+    </p>
+
+    <h3>6. CONTACT US</h3>
+    <p>
+      If you have any questions about this Privacy Policy, please contact us via
+      our <a href="{{ url_for('contact') }}">Contact Page</a>.
+    </p>
+  </div>
+</div>
+{% endblock %}

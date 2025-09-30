@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %}AI Cover Letter Generator - ATC{%
+endblock %} {% block content %}
+<div class="container page-container">
+  <div class="text-center">
+    <h1 class="section-title">AI Cover Letter Generator</h1>
+    <p class="subtitle">
+      Upload your resume, and our AI will generate a professional, adaptable
+      cover letter template for you.
+    </p>
+  </div>
+
+  <!-- The form ID and results ID are critical for the JavaScript to work -->
+  <form id="cover-letter-form" class="ai-tool-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <label for="resume-upload-cl" class="sr-only">Upload Resume</label>
+    <input
+      id="resume-upload-cl"
+      type="file"
+      name="resume"
+      accept=".pdf"
+      required
+    />
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      style="margin-top: 20px"
+    >
+      <i class="fas fa-envelope-open-text"></i> Generate Cover Letter
+    </button>
+  </form>
+
+  <div id="cover-letter-results" class="ai-tool-results">
+    <p>Your generated cover letter will appear here...</p>
+  </div>
+</div>
+{% endblock %}

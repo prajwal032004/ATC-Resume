@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block title %}Resume Preview - ATC{% endblock %} {%
+block content %}
+<div class="container page-container">
+  <!-- 
+        This section provides clear instructions and the primary actions for the user:
+        1. Download the PDF.
+        2. Go back to the editor to make changes.
+    -->
+  <div class="preview-header">
+    <h1 class="section-title">Your Resume Preview</h1>
+    <p class="subtitle">
+      This is an exact preview of your final document. Review it carefully for
+      any errors.<br />
+      If everything looks good, download your ATS-friendly PDF.
+    </p>
+
+    <div class="preview-actions" style="margin-bottom: 40px">
+      <a href="{{ url_for('download_pdf') }}" class="btn btn-primary btn-lg">
+        <i class="fas fa-download"></i> Generate and Download PDF
+      </a>
+      <a
+        href="{{ url_for('resume_builder') }}"
+        class="btn btn-secondary"
+        style="margin-left: 15px"
+      >
+        <i class="fas fa-edit"></i> Go Back to Editor
+      </a>
+    </div>
+  </div>
+
+  <!--
+        This wrapper provides the "page on a page" visual effect, making the resume
+        stand out from the rest of the website. The styles for this class are
+        defined in your main 'style.css' file.
+    -->
+  <div class="resume-preview-wrapper">
+    <!-- 
+            This is the most important part. By including 'resume_template.html', we ensure
+            that the preview is a 100% accurate representation of the final PDF.
+            This is much better than rewriting the logic, as it adheres to the DRY
+            (Don't Repeat Yourself) principle.
+        -->
+    {% include 'resume_template.html' %}
+  </div>
+</div>
+{% endblock %}

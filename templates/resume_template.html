@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Resume</title>
+    <!-- 
+        This template uses self-contained CSS in a <style> block for maximum compatibility 
+        with PDF generation libraries like wkhtmltopdf. It avoids complex CSS like
+        Grid or advanced Flexbox properties to ensure consistent rendering.
+    -->
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 10.5pt;
+        color: #333333;
+        line-height: 1.4;
+      }
+      .resume-container {
+        width: 8.5in; /* Standard US Letter width */
+        padding: 0.5in;
+        margin: auto;
+      }
+      .header {
+        text-align: center;
+        border-bottom: 2px solid #3b82f6;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        margin: 0;
+        color: #1e40af;
+        font-size: 26pt;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+      .contact-info {
+        font-size: 9.5pt;
+        color: #555555;
+        margin-top: 8px;
+      }
+      .contact-info a {
+        color: #3b82f6;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+      .section {
+        margin-bottom: 18px;
+      }
+      .section h2 {
+        font-size: 14pt;
+        color: #1e40af;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 4px;
+        margin-top: 0;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .summary p {
+        font-style: italic;
+        text-align: justify;
+        margin: 0;
+      }
+      .skills-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .skills-list li {
+        margin-bottom: 6px;
+      }
+      .item {
+        margin-bottom: 12px;
+      }
+      .item-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2px;
+      }
+      .item-header .title {
+        font-size: 11pt;
+        font-weight: bold;
+      }
+      .item-header .date {
+        font-size: 10pt;
+        color: #444444;
+        font-style: italic;
+      }
+      .item-subheader {
+        font-weight: bold;
+        font-style: italic;
+        color: #555555;
+        font-size: 10.5pt;
+      }
+      .item-desc {
+        padding-left: 15px;
+        margin-top: 5px;
+      }
+      .item-desc ul {
+        list-style-type: disc;
+        margin: 0;
+        padding-left: 15px;
+      }
+      .education-item {
+        margin-bottom: 5px;
+      }
+      .education-item .degree {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="resume-container">
+      <div class="header">
+        <h1>{{ data.get('name', [''])[0] }}</h1>
+        <div class="contact-info">
+          {{ data.get('email', [''])[0] }}  |  {{ data.get('phone', [''])[0] }}
+          {% if data.get('linkedin', [''])[0] %}  | 
+          <a href="{{ data.get('linkedin', [''])[0] }}"
+            >{{ data.get('linkedin', [''])[0] | replace('https://www.', '') |
+            replace('http://www.', '') | replace('https://', '') |
+            replace('http://', '') }}</a
+          >
+          {% endif %} {% if data.get('github', [''])[0] %}  | 
+          <a href="{{ data.get('github', [''])[0] }}">GitHub</a> {% endif %} {%
+          if data.get('portfolio', [''])[0] %}  | 
+          <a href="{{ data.get('portfolio', [''])[0] }}">Portfolio</a> {% endif
+          %}
+        </div>
+      </div>
+
+      {% if data.get('summary_full', [''])[0] %}
+      <div class="section summary">
+        <h2>Professional Summary</h2>
+        <p>{{ data.get('summary_full', [''])[0] }}</p>
+      </div>
+      {% endif %} {% if data.get('edu_institution', []) and
+      data.get('edu_institution')[0] %}
+      <div class="section education">
+        <h2>Education</h2>
+        {% for i in range(data['edu_institution']|length) %}
+        <div class="item education-item">
+          <div class="item-header">
+            <span class="title">{{ data['edu_institution'][i] }}</span>
+            <span class="date">{{ data['edu_year'][i] }}</span>
+          </div>
+          <div class="degree">{{ data['edu_degree'][i] }}</div>
+          {% if data['edu_courses'][i] %}
+          <div><em>Relevant Coursework:</em> {{ data['edu_courses'][i] }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %} {# CORRECTED: This whole condition was broken. It now checks
+      if any skills exist. #} {% if data.get('skills_langs', [''])[0] or
+      data.get('skills_frameworks', [''])[0] or data.get('skills_tools',
+      [''])[0] or data.get('skills_ml', [''])[0] or data.get('skills_web',
+      [''])[0] or data.get('add_soft_skills', [''])[0] %}
+      <div class="section skills">
+        <h2>Technical Skills</h2>
+        <ul class="skills-list">
+          {% if data.get('skills_langs', [''])[0] %}
+          <li>
+            <strong>Languages:</strong> {{ data.get('skills_langs', [''])[0] }}
+          </li>
+          {% endif %} {% if data.get('skills_frameworks', [''])[0] %}
+          <li>
+            <strong>Frameworks & Libraries:</strong> {{
+            data.get('skills_frameworks', [''])[0] }}
+          </li>
+          {% endif %} {% if data.get('skills_tools', [''])[0] %}
+          <li>
+            <strong>Tools & Technologies:</strong> {{ data.get('skills_tools',
+            [''])[0] }}
+          </li>
+          {% endif %} {% if data.get('skills_ml', [''])[0] %}
+          <li>
+            <strong>Machine Learning:</strong> {{ data.get('skills_ml', [''])[0]
+            }}
+          </li>
+          {% endif %} {% if data.get('skills_web', [''])[0] %}
+          <li>
+            <strong>Web Development:</strong> {{ data.get('skills_web', [''])[0]
+            }}
+          </li>
+          {% endif %} {% if data.get('add_soft_skills', [''])[0] %}
+          <li>
+            <strong>Soft Skills:</strong> {{ data.get('add_soft_skills',
+            [''])[0] }}
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      {% endif %} {% if data.get('exp_title', []) and data.get('exp_title')[0]
+      %}
+      <div class="section experience">
+        <h2>Experience</h2>
+        {% for i in range(data['exp_title']|length) %}
+        <div class="item">
+          <div class="item-header">
+            <span class="title">{{ data['exp_title'][i] }}</span>
+            <span class="date">{{ data['exp_dates'][i] }}</span>
+          </div>
+          <div class="item-subheader">
+            {{ data['exp_company'][i] }} | {{ data['exp_location'][i] }}
+          </div>
+          {% if data['exp_desc'][i] %}
+          <div class="item-desc">
+            <ul>
+              {% for line in data['exp_desc'][i].split('\n') %}{% if
+              line.strip() %}
+              <li>{{ line.strip() | trim }}</li>
+              {% endif %}{% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %} {% if data.get('proj_title', []) and data.get('proj_title')[0]
+      %}
+      <div class="section projects">
+        <h2>Projects</h2>
+        {% for i in range(data['proj_title']|length) %}
+        <div class="item">
+          <div class="item-header">
+            <span class="title">{{ data['proj_title'][i] }}</span>
+            {% if data['proj_link'][i] %}<a
+              href="{{ data['proj_link'][i] }}"
+              class="date"
+              >View Link</a
+            >{% endif %}
+          </div>
+          {% if data['proj_desc'][i] %}
+          <div class="item-desc">
+            <ul>
+              {% for line in data['proj_desc'][i].split('\n') %}{% if
+              line.strip() %}
+              <li>{{ line.strip() | trim }}</li>
+              {% endif %}{% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %} {% if data.get('cert_title', []) and data.get('cert_title')[0]
+      %}
+      <div class="section certifications">
+        <h2>Certifications</h2>
+        <!-- Using a simple list for certifications for cleaner look -->
+        <ul class="skills-list">
+          {% for i in range(data['cert_title']|length) %}
+          <li>
+            <strong>{{ data['cert_title'][i] }}:</strong>
+            <span>{{ data['cert_platform'][i] }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>

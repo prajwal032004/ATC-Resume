@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block title %}AI Resume Analyzer - ATC{% endblock
+%} {% block content %}
+<div class="container page-container">
+  <div class="text-center">
+    <h1 class="section-title">AI Resume Analyzer</h1>
+    <p class="subtitle">
+      Upload your resume (PDF) to get an instant ATS score, keyword analysis,
+      and actionable feedback.
+    </p>
+  </div>
+
+  <form id="resume-analyzer-form" class="ai-tool-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <input type="file" name="resume" accept=".pdf" required />
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      style="margin-top: 20px"
+    >
+      <i class="fas fa-robot"></i> Analyze My Resume
+    </button>
+  </form>
+
+  <div id="analysis-results">
+    <p>Your analysis will appear here...</p>
+  </div>
+</div>
+{% endblock %}

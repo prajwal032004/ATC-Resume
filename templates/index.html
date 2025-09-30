@@ -1,0 +1,132 @@
+{% extends 'base.html' %} {% block title %}Home - AI-Powered Resume Builder and
+Career Tools{% endblock %} {% block content %}
+
+<section class="hero">
+  <div class="hero-content container">
+    <h1>Build a Job-Winning Resume with AI</h1>
+    <p>
+      Create a professional, ATS-friendly resume in minutes. Get AI-powered
+      insights to stand out and land your dream tech job.
+    </p>
+    <div class="hero-buttons">
+      <a href="{{ url_for('resume_builder') }}" class="btn btn-primary btn-lg"
+        >Create My Resume <i class="fas fa-arrow-right"></i
+      ></a>
+      <a
+        href="{{ url_for('resume_analyzer_page') }}"
+        class="btn btn-secondary btn-lg"
+        >Analyze Existing Resume</a
+      >
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works" class="container text-center">
+  <h2 class="section-title">How It Works in 3 Simple Steps</h2>
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-icon">1</div>
+      <h3>Fill the Details</h3>
+      <p>
+        Use our intuitive, step-by-step form to enter your professional
+        information.
+      </p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">2</div>
+      <h3>Enhance with AI</h3>
+      <p>
+        Leverage Gemini AI to perfect your summary, analyze keywords, and more.
+      </p>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">3</div>
+      <h3>Download PDF</h3>
+      <p>
+        Preview your modern resume and download a pixel-perfect, ATS-friendly
+        PDF.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="bg-light-gray Prajwal">
+  <div class="container">
+    <h2 class="section-title text-center">A Full Suite of Career Tools</h2>
+    <div class="feature-grid-detailed">
+      <div class="feature-card-detailed">
+        <i class="fas fa-file-invoice"></i>
+        <h3>Intelligent Resume Builder</h3>
+        <p>
+          Craft stunning resumes step-by-step, covering everything from personal details to impactful projects.
+        </p>
+      </div>
+      <div class="feature-card-detailed">
+        <i class="fas fa-robot"></i>
+        <h3>AI Resume Analyzer</h3>
+        <p>
+          Instantly analyze your resume to get ATS scores, keyword optimizations, and design recommendations.
+        </p>
+      </div>
+      <div class="feature-card-detailed">
+        <i class="fas fa-envelope-open-text"></i>
+        <h3>Cover Letter Generator</h3>
+        <p>
+          Generate tailored cover letters that align with your resume and target role.
+        </p>
+      </div>
+      <div class="feature-card-detailed">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Job Matching AI</h3>
+        <p>
+          Find roles and industries that fit your skills, experience, and aspirations.
+        </p>
+      </div>
+      <div class="feature-card-detailed">
+        <i class="fas fa-chart-line"></i>
+        <h3>Skill Gap Analysis</h3>
+        <p>
+          Identify missing skills and learn what employers are seeking in today’s market.
+        </p>
+      </div>
+      <div class="feature-card-detailed">
+        <i class="fas fa-download"></i>
+        <h3>ATS-Friendly PDF Export</h3>
+        <p>
+          Export professional, clean resumes optimized for applicant tracking systems.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="container Yash">
+  <h2 class="section-title text-center">Loved by Job Seekers</h2>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <blockquote>
+        “The AI summary generator is a game-changer! It transformed my draft into a professional masterpiece. I landed two interviews in a week.”
+      </blockquote>
+    </div>
+    <div class="testimonial-card">
+      <blockquote>
+        “The resume analyzer boosted my ATS score to 88 and pinpointed missing keywords. Essential for serious job seekers.”
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+
+<section id="final-cta" class="bg-gradient">
+  <div class="container text-center">
+    <h2>Ready to Elevate Your Career?</h2>
+    <p>
+      Start building your future today. It's free, fast, and powered by
+      world-class AI.
+    </p>
+    <a href="{{ url_for('resume_builder') }}" class="btn btn-light btn-lg"
+      >Get Started Now <i class="fas fa-rocket"></i
+    ></a>
+  </div>
+</section>
+{% endblock %}

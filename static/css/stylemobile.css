@@ -1,0 +1,807 @@
+/* ==========================================================================
+   ATC Resume Builder - Mobile Responsive Styles (stylemobile.css)
+   Max-width: 768px
+   ========================================================================== */
+
+/* Base Mobile Adjustments */
+@media (max-width: 768px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    padding-top: 19px;
+  }
+
+  .container {
+    padding: 0 15px;
+    max-width: 100%;
+  }
+
+  /* ==========================================================================
+     Navigation - Mobile
+     ========================================================================== */
+
+  nav {
+    flex-direction: column;
+    padding: 10px 15px;
+    position: relative;
+  }
+
+  nav .logo {
+    font-size: 31px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    background-color: #1a202c;
+    border-radius: 8px;
+    padding: 10px 0;
+  }
+
+  nav ul li {
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  nav ul li a {
+    padding: 10px 15px;
+    display: block;
+    font-size: 14px;
+  }
+
+  /* Mobile Dropdown */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-content {
+    position: static;
+    display: none;
+    background-color: #2d3748;
+    box-shadow: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 100%;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  /* Custom Dropdown Mobile */
+  .dropdown-custom {
+    width: 100%;
+  }
+
+  .dropdown-content-custom {
+    position: static;
+    background-color: #2d3748;
+    box-shadow: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 100%;
+    min-width: auto;
+  }
+
+  /* ==========================================================================
+     Hero Section - Mobile
+     ========================================================================== */
+
+  .hero {
+    padding: 53px 0;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 28px;
+    line-height: 1.3;
+    margin-bottom: 15px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  /* ==========================================================================
+     Buttons - Mobile
+     ========================================================================== */
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+
+  .btn-lg {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  .btn i {
+    margin-left: 8px;
+  }
+
+  /* ==========================================================================
+     Sections - Mobile
+     ========================================================================== */
+
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  /* ==========================================================================
+     Step Grid - Mobile
+     ========================================================================== */
+
+  .step-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .step-card {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .step-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    margin: 0 auto 15px auto;
+  }
+
+  .step-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .step-card p {
+    font-size: 14px;
+  }
+
+  /* ==========================================================================
+     Feature Grid - Mobile
+     ========================================================================== */
+
+  .feature-grid-detailed {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .feature-card-detailed {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .feature-card-detailed i {
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+
+  .feature-card-detailed h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .feature-card-detailed p {
+    font-size: 14px;
+  }
+
+  /* ==========================================================================
+     Testimonials - Mobile
+     ========================================================================== */
+
+  .testimonial-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .testimonial-card {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .testimonial-card blockquote {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ==========================================================================
+     Forms - Mobile
+     ========================================================================== */
+
+  .ai-tool-form,
+  .resume-form {
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .ai-tool-form input[type="file"],
+  .resume-form input,
+  .resume-form textarea,
+  .resume-form select {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+
+  .resume-form textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  /* Dynamic Form Sections */
+  .dynamic-section {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .section-header h3 {
+    font-size: 16px;
+  }
+
+  .btn-remove {
+    align-self: flex-end;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* ==========================================================================
+     Preview Actions - Mobile
+     ========================================================================== */
+
+  .preview-actions {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .preview-actions .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .preview-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  /* ==========================================================================
+     Resume Preview - Mobile
+     ========================================================================== */
+
+  .resume-preview-wrapper {
+    margin: 0 -15px;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* Resume Template Mobile Adjustments */
+  .resume-container {
+    padding: 20px 15px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .resume-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .resume-header h1 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .resume-header .contact-info {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 11px;
+  }
+
+  .resume-section {
+    margin-bottom: 20px;
+  }
+
+  .resume-section h2 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 3px;
+  }
+
+  .resume-item {
+    margin-bottom: 15px;
+  }
+
+  .resume-item h3 {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  .resume-item .item-meta {
+    font-size: 11px;
+    margin-bottom: 5px;
+  }
+
+  .resume-item ul {
+    padding-left: 15px;
+  }
+
+  .resume-item li {
+    margin-bottom: 3px;
+    font-size: 11px;
+  }
+
+  .skills-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .skill-category {
+    width: 100%;
+  }
+
+  .skill-category h4 {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  .skills {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .skill-tag {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  /* ==========================================================================
+     Results/Analysis Display - Mobile
+     ========================================================================== */
+
+  .ai-tool-results {
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+
+  #analysis-results,
+  #cover-letter-results,
+  #job-matcher-results,
+  #skill-gap-results {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ==========================================================================
+     Footer - Mobile
+     ========================================================================== */
+
+  footer {
+    padding: 30px 0 20px 0;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .footer-about,
+  .footer-links,
+  .footer-social {
+    width: 100%;
+  }
+
+  .footer-about h3,
+  .footer-links h3,
+  .footer-social h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .footer-about p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .footer-links ul {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-links ul li a {
+    font-size: 14px;
+  }
+
+  .footer-social a {
+    margin: 0 10px;
+    font-size: 20px;
+  }
+
+  .newsletter {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .newsletter input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .newsletter button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  #aiToolsToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a3aebe;
+    text-decoration: none;
+    padding: 8px 0px;
+    background-color: #121826;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#aiToolsToggle:hover {
+    background-color: #121826;
+}
+  /* ==========================================================================
+     Chatbot - Mobile
+     ========================================================================== */
+
+  #chatbot-icon {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  #chatbot-popup {
+    bottom: 80px;
+    right: 20px;
+    left: 20px;
+    width: auto;
+    max-height: 400px;
+  }
+
+  .chatbot-header {
+    padding: 12px 15px;
+  }
+
+  .chatbot-header h3 {
+    font-size: 16px;
+  }
+
+  .chatbot-body {
+    max-height: 250px;
+    padding: 10px 15px;
+  }
+
+  .bot-message,
+  .user-message {
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .chatbot-footer {
+    padding: 10px 15px;
+  }
+
+  #chatbot-input {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  #chatbot-send {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* ==========================================================================
+     Page Container - Mobile
+     ========================================================================== */
+
+  .page-container {
+    padding: 20px 0;
+  }
+
+  .page-content {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .page-content h3 {
+    font-size: 16px;
+    margin: 20px 0 10px 0;
+  }
+
+  .page-content ul li {
+    margin-bottom: 8px;
+  }
+
+  /* ==========================================================================
+     Background Sections - Mobile
+     ========================================================================== */
+
+  .bg-light-gray,
+  .bg-gradient {
+    padding: 40px 0;
+  }
+
+  .bg-gradient h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .bg-gradient p {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  /* ==========================================================================
+     Utility Classes - Mobile
+     ========================================================================== */
+
+  .text-center {
+    text-align: center;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ==========================================================================
+     Loading States - Mobile
+     ========================================================================== */
+
+  .loading {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: #666;
+  }
+
+  .loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* ==========================================================================
+     Error States - Mobile
+     ========================================================================== */
+
+  .error {
+    background-color: #fee;
+    color: #c33;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    border: 1px solid #fcc;
+    font-size: 14px;
+  }
+
+  .success {
+    background-color: #efe;
+    color: #363;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    border: 1px solid #cfc;
+    font-size: 14px;
+  }
+
+  /* ==========================================================================
+     Responsive Images - Mobile
+     ========================================================================== */
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ==========================================================================
+     Print Styles - Mobile
+     ========================================================================== */
+
+  @media print {
+    .preview-header,
+    .preview-actions,
+    nav,
+    footer,
+    #chatbot-icon,
+    #chatbot-popup {
+      display: none !important;
+    }
+
+    .resume-preview-wrapper {
+      margin: 0;
+      box-shadow: none;
+    }
+
+    body {
+      font-size: 12px;
+    }
+  }
+}
+
+/* ==========================================================================
+   Extra Small Screens (320px - 480px)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 24px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 29px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    padding: inherit;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .btn-lg {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .resume-container {
+    padding: 15px 10px;
+    font-size: 11px;
+  }
+
+  .resume-header h1 {
+    font-size: 18px;
+  }
+
+  .resume-section h2 {
+    font-size: 13px;
+  }
+
+  .resume-item h3 {
+    font-size: 12px;
+  }
+
+  .footer-social a {
+    margin: 0 8px;
+    font-size: 18px;
+  }
+}
+
+/* ==========================================================================
+   Landscape Orientation - Mobile
+   ========================================================================== */
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    padding: 30px 0;
+  }
+
+  .hero-buttons {
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .hero-buttons .btn {
+    width: auto;
+    min-width: 150px;
+  }
+
+  nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav ul li {
+    margin: 5px 10px;
+  }
+}

@@ -1,0 +1,311 @@
+{% extends 'base.html' %} {% block title %}Resume Builder - ATC{% endblock %} {%
+block content %}
+<div class="container page-container">
+  <h1 class="section-title text-center">Build Your Resume</h1>
+  <p class="subtitle text-center">
+    Fill in your details step-by-step. Use the AI button to enhance your
+    summary!
+  </p>
+
+  <form
+    action="{{ url_for('resume_builder') }}"
+    method="POST"
+    id="resume-form"
+    class="resume-form"
+  >
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+    <!-- Personal Details -->
+    <fieldset>
+      <legend><i class="fas fa-user-circle"></i> Personal Details</legend>
+      <div class="form-grid-2">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
+        <input type="url" name="linkedin" placeholder="LinkedIn Profile URL" />
+        <input type="url" name="github" placeholder="GitHub Profile URL" />
+        <input
+          type="url"
+          name="portfolio"
+          placeholder="Portfolio/Website URL"
+        />
+      </div>
+    </fieldset>
+
+    <!-- Professional Summary -->
+    <fieldset>
+      <legend><i class="fas fa-id-card-alt"></i> Professional Summary</legend>
+      <textarea
+        name="summary_short"
+        id="summary-short"
+        placeholder="Write a short line about yourself (e.g., 'A passionate Python developer focused on web applications.')"
+        rows="2"
+      ></textarea>
+      <button type="button" id="expand-summary-btn" class="btn btn-ai">
+        <i class="fas fa-magic"></i> Generate Full Summary with AI
+      </button>
+      <textarea
+        name="summary_full"
+        id="summary-full"
+        placeholder="Your AI-generated professional summary will appear here..."
+        rows="5"
+      ></textarea>
+    </fieldset>
+
+    <!-- Education -->
+    <fieldset>
+      <legend><i class="fas fa-graduation-cap"></i> Education</legend>
+      <div id="education-container">
+        <div class="dynamic-item">
+          <input
+            type="text"
+            name="edu_institution"
+            placeholder="Institution/University"
+            required
+          />
+          <input
+            type="text"
+            name="edu_degree"
+            placeholder="Degree (e.g., Bachelor of Science in CS)"
+          />
+          <div class="form-grid-2">
+            <input
+              type="text"
+              name="edu_year"
+              placeholder="Year of Completion (e.g., 2024)"
+            />
+            <input type="text" name="edu_gpa" placeholder="GPA / Grade" />
+          </div>
+          <input
+            type="text"
+            name="edu_courses"
+            placeholder="Relevant Coursework (comma-separated)"
+          />
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-add-item"
+        data-container="education-container"
+        data-template="education-template"
+      >
+        <i class="fas fa-plus"></i> Add Another Degree
+      </button>
+    </fieldset>
+
+    <!-- Skills -->
+    <fieldset>
+      <legend><i class="fas fa-code"></i> Technical Skills</legend>
+      <p style="color: var(--dark-gray); margin-bottom: 15px">
+        Enter comma-separated lists for each category.
+      </p>
+      <input
+        type="text"
+        name="skills_langs"
+        placeholder="Programming Languages (e.g., Python, Java, C++)"
+      />
+      <input
+        type="text"
+        name="skills_frameworks"
+        placeholder="Frameworks & Libraries (e.g., Flask, React, Scikit-learn)"
+      />
+      <input
+        type="text"
+        name="skills_tools"
+        placeholder="Tools & Technologies (e.g., Git, Docker, VS Code)"
+      />
+      <input
+        type="text"
+        name="skills_ml"
+        placeholder="Machine Learning Skills (e.g., PyTorch, NLP, Computer Vision)"
+      />
+      <input
+        type="text"
+        name="skills_web"
+        placeholder="Web Development Skills (e.g., HTML, CSS, REST APIs)"
+      />
+      <input
+        type="text"
+        name="add_soft_skills"
+        placeholder="Soft Skills (e.g., Team Collaboration, Problem Solving)"
+      />
+    </fieldset>
+
+    <!-- Experience -->
+    <fieldset>
+      <legend><i class="fas fa-briefcase"></i> Experience</legend>
+      <div id="experience-container">
+        <div class="dynamic-item">
+          <input type="text" name="exp_title" placeholder="Job Title / Role" />
+          <input
+            type="text"
+            name="exp_company"
+            placeholder="Company / Organization"
+          />
+          <div class="form-grid-2">
+            <input type="text" name="exp_location" placeholder="Location" />
+            <input
+              type="text"
+              name="exp_dates"
+              placeholder="Dates (e.g., May 2023 - Aug 2023)"
+            />
+          </div>
+          <textarea
+            name="exp_desc"
+            placeholder="Description & Achievements (use a new line for each bullet point)"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-add-item"
+        data-container="experience-container"
+        data-template="experience-template"
+      >
+        <i class="fas fa-plus"></i> Add Another Experience
+      </button>
+    </fieldset>
+
+    <!-- Projects -->
+    <fieldset>
+      <legend><i class="fas fa-project-diagram"></i> Projects</legend>
+      <div id="projects-container">
+        <div class="dynamic-item">
+          <input type="text" name="proj_title" placeholder="Project Title" />
+          <input type="url" name="proj_link" placeholder="GitHub/Live Link" />
+          <textarea
+            name="proj_desc"
+            placeholder="Project Description (use a new line for each bullet point)"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-add-item"
+        data-container="projects-container"
+        data-template="project-template"
+      >
+        <i class="fas fa-plus"></i> Add Another Project
+      </button>
+    </fieldset>
+
+    <!-- Certifications -->
+    <fieldset>
+      <legend><i class="fas fa-certificate"></i> Certifications</legend>
+      <div id="certs-container">
+        <div class="dynamic-item form-grid-2">
+          <input
+            type="text"
+            name="cert_title"
+            placeholder="Certification Title (e.g., Google Data Analytics)"
+          />
+          <input
+            type="text"
+            name="cert_platform"
+            placeholder="Platform (e.g., Coursera)"
+          />
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-add-item"
+        data-container="certs-container"
+        data-template="cert-template"
+      >
+        <i class="fas fa-plus"></i> Add Another Certification
+      </button>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary btn-full btn-lg">
+      Preview & Download Resume <i class="fas fa-arrow-right"></i>
+    </button>
+  </form>
+</div>
+
+<!-- ############################################################# -->
+<!-- CORRECTED: ADDED MISSING TEMPLATES FOR DYNAMIC "ADD" BUTTONS  -->
+<!-- ############################################################# -->
+
+<!-- Education Template -->
+<template id="education-template">
+  <div class="dynamic-item">
+    <hr />
+    <input
+      type="text"
+      name="edu_institution"
+      placeholder="Institution/University"
+      required
+    />
+    <input
+      type="text"
+      name="edu_degree"
+      placeholder="Degree (e.g., Bachelor of Science in CS)"
+    />
+    <div class="form-grid-2">
+      <input
+        type="text"
+        name="edu_year"
+        placeholder="Year of Completion (e.g., 2024)"
+      />
+      <input type="text" name="edu_gpa" placeholder="GPA / Grade" />
+    </div>
+    <input
+      type="text"
+      name="edu_courses"
+      placeholder="Relevant Coursework (comma-separated)"
+    />
+  </div>
+</template>
+
+<!-- Experience Template -->
+<template id="experience-template">
+  <div class="dynamic-item">
+    <hr />
+    <input type="text" name="exp_title" placeholder="Job Title / Role" />
+    <input
+      type="text"
+      name="exp_company"
+      placeholder="Company / Organization"
+    />
+    <div class="form-grid-2">
+      <input type="text" name="exp_location" placeholder="Location" />
+      <input
+        type="text"
+        name="exp_dates"
+        placeholder="Dates (e.g., May 2023 - Aug 2023)"
+      />
+    </div>
+    <textarea
+      name="exp_desc"
+      placeholder="Description & Achievements (use a new line for each bullet point)"
+      rows="4"
+    ></textarea>
+  </div>
+</template>
+
+<!-- Project Template -->
+<template id="project-template">
+  <div class="dynamic-item">
+    <hr />
+    <input type="text" name="proj_title" placeholder="Project Title" />
+    <input type="url" name="proj_link" placeholder="GitHub/Live Link" />
+    <textarea
+      name="proj_desc"
+      placeholder="Project Description (use a new line for each bullet point)"
+      rows="3"
+    ></textarea>
+  </div>
+</template>
+
+<!-- Certification Template -->
+<template id="cert-template">
+  <div class="dynamic-item form-grid-2">
+    <hr />
+    <input type="text" name="cert_title" placeholder="Certification Title" />
+    <input type="text" name="cert_platform" placeholder="Platform" />
+  </div>
+</template>
+
+{% endblock %}
